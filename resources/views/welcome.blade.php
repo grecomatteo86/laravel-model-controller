@@ -85,7 +85,7 @@
                     <h1>{{$val->name}}</h1>
                     <h2>{{$val->author}}</h2>
                     <h2>{{$val->genre}}</h2>
-                    <h2>{{$val->description}}</h2>
+                    <p>{{$val->description}}</p>
                         
                 @endforeach
                 </ul>
