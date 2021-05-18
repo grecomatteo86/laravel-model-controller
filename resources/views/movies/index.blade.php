@@ -6,6 +6,10 @@
 
 @section('content')
 
+    <div class="text-right">
+        <button type="button" class="btn btn-success">Aggiungi Film</button>
+    </div>
+
     <table class="table">
 
         <thead>
