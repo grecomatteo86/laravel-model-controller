@@ -28,7 +28,11 @@
                 <td>{{$val->name}}</td>
                 <td>{{$val->author}}</td>
                 <td>{{$val->genre}}</td>
-                <td><a href="{{route('movies.show', ['movie' => $val -> id])}}">Film Focus</a></td>
+                <td>
+                    <a href="{{route('movies.show', ['movie' => $val -> id])}}">
+                        <button type="button" class="btn btn-primary">Film Focus</button>
+                    </a>
+                </td>
 
             </tr>
             
