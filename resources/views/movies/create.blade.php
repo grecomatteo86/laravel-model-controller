@@ -8,7 +8,9 @@
     
     <div>
 
-        <form action="">
+        <form action="{{route('movies.store')}}" method="POST">
+            @method('POST')
+            @csrf
 
             <div class="mb-3">
                 <label for="name">Titolo</label>
@@ -28,6 +30,11 @@
             <div class="mb-3">
                 <label for="description">Trama</label>
                 <textarea class="form-control" name="description" id="description" rows="10" placeholder="Trama"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="description">Trama</label>
+
             </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>
