@@ -5,17 +5,42 @@
 @endsection
 
 @section('content')
-    <ul>
-        @foreach ($movies as $val)
+
+    <table class="table">
+
+        <thead>
             
-            <a href="{{route('movies.show', ['movie' => $val -> id])}}">Film Focus</a>
-            <h1>{{$val->name}}</h1>
-            <h2>{{$val->author}}</h2>
-            <h2>{{$val->genre}}</h2>
-            <p>{{$val->description}}</p>
+            <tr>
+                <th scope="col">Titolo</th>
+                <th scope="col">Regista</th>
+                <th scope="col">Genere</th>
+                <th scope="col">Descrizione</th>
+                <th scope="col">Azioni</th>
+            </tr>
+        
+        </thead>
+
+        <tbody>
+
+        @foreach ($movies as $val)
+
+            <tr>
+
+                <td>{{$val->name}}</td>
+                <td>{{$val->author}}</td>
+                <td>{{$val->genre}}</td>
+                <td>{{$val->description}}</td>
+                <td><a href="{{route('movies.show', ['movie' => $val -> id])}}">Film Focus</a></td>
+
+            </tr>
+            
                 
         @endforeach
-    </ul>
+
+        </tbody>
+
+    </table>
+
 @endsection
 
     
