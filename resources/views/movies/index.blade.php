@@ -7,7 +7,9 @@
 @section('content')
 
     <div class="text-right">
-        <button type="button" class="btn btn-success">Aggiungi Film</button>
+        <a href="{{route('movies.create')}}">
+            <button type="button" class="btn btn-success">Aggiungi Film</button>
+        </a>
     </div>
 
     <table class="table">
