@@ -14,7 +14,6 @@
                 <th scope="col">Titolo</th>
                 <th scope="col">Regista</th>
                 <th scope="col">Genere</th>
-                <th scope="col">Descrizione</th>
                 <th scope="col">Azioni</th>
             </tr>
         
@@ -29,7 +28,6 @@
                 <td>{{$val->name}}</td>
                 <td>{{$val->author}}</td>
                 <td>{{$val->genre}}</td>
-                <td>{{$val->description}}</td>
                 <td><a href="{{route('movies.show', ['movie' => $val -> id])}}">Film Focus</a></td>
 
             </tr>
