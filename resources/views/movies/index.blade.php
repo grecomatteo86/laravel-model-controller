@@ -38,6 +38,12 @@
                     <a href="{{route('movies.show', ['movie' => $val -> id])}}">
                         <button type="button" class="btn btn-primary">Film Focus</button>
                     </a>
+
+                    <form action="{{route('movies.destroy', ['movie' => $val -> id])}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Elimina</button>
+                    </form>
                 </td>
 
             </tr>
