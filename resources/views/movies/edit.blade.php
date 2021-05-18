@@ -18,8 +18,8 @@
     
     <div>
 
-        <form action="{{route('movies.store')}}" method="POST">
-            @method('POST')
+        <form action="{{route('movies.update', ['movie' => $movie->id])}}" method="POST">
+            @method('PUT')
             @csrf
 
             <div class="mb-3">
