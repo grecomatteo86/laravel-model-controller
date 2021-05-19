@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// route che ha come unico scopo quello di renindirizzare di default l'utente alla home page
+Route::get('/', 'HomeController@index');
 
 Route::resource('movies', 'MovieController');
 
