@@ -27,7 +27,11 @@
             },
 
             mounted:function(){
-                console.log('prova');
+                axios.get('/laravel-model-controller/public/api/movies')
+                .then((response) => {
+                    // console.log(response.data);
+                    this.films = response.data;
+                })
             }
         })
     </script>
