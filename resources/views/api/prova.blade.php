@@ -10,7 +10,13 @@
 
     <h1>Proviamo le Api</h1>
 
-    <div id="app"></div>
+    <div id="app">
+        <ul>
+            <li v-for='item in films'>
+                <p>@{{item.name}}</p>
+            </li>
+        </ul>
+    </div>
 
     <!-- axios_cdn -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
