@@ -11,11 +11,15 @@
     <h1>Proviamo le Api</h1>
 
     <div id="app">
+
+        <h2>Lista tutti i Film</h2>
+
         <ul>
             <li v-for='item in films'>
                 <p>@{{item.name}}</p>
             </li>
         </ul>
+
     </div>
 
     <!-- axios_cdn -->
@@ -29,7 +33,8 @@
             el:'#app',
 
             data:{
-                films:[]
+                films:[],
+                film:[]
             },
 
             mounted:function(){
@@ -37,6 +42,12 @@
                 .then((response) => {
                     // console.log(response.data);
                     this.films = response.data;
+                })
+
+                axios.get('/laravel-model-controller/public/api/movies/{movie}')
+                .then((response) => {
+                    // console.log(response.data);
+                    this.film = response.data;
                 })
             }
         })

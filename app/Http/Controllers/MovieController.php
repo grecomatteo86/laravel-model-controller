@@ -15,7 +15,9 @@ class MovieController extends Controller
     public function index()
     {
         $movies = Movie::all();
+        
         return view ('movies.index', ['movies' => $movies]);
+        // return view('movies.index',  compact['movies']);
     }
 
     /**
@@ -36,6 +38,7 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
 
         $request->validate([
             'name' => 'required|string|max:100',

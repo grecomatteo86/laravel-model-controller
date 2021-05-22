@@ -17,6 +17,7 @@
         <thead>
             
             <tr>
+                <th scope="col">Immagine</th>
                 <th scope="col">Titolo</th>
                 <th scope="col">Regista</th>
                 <th scope="col">Genere</th>
@@ -30,7 +31,7 @@
         @foreach ($movies as $val)
 
             <tr>
-
+                <td><img src="{{$val->cover_image}}" alt="immagine film"></td>
                 <td>{{$val->name}}</td>
                 <td>{{$val->author}}</td>
                 <td>{{$val->genre}}</td>
