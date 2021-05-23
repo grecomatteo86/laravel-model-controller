@@ -23,6 +23,11 @@
             @csrf
 
             <div class="mb-3">
+                <label for="cover_image">Immagine Cover</label>
+                <input type="text" class="form-control" id="cover_image" name="cover_image" placeholder="Url">
+            </div>
+
+            <div class="mb-3">
                 <label for="name">Titolo</label>
                 <input type="text" class="form-control" id="name" name="name" placeholder="Titolo" required>
             </div>

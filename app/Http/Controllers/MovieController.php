@@ -50,6 +50,10 @@ class MovieController extends Controller
         $data = $request -> all();
 
         $movieNew = new Movie();
+        
+        if(isset($data['cover_image']) && !empty($data['cover_image'])){
+            $movieNew -> cover_image = $data['cover_image'];
+        }
         $movieNew -> name = $data['name'];
         $movieNew -> author = $data['author'];
         $movieNew -> genre = $data['genre'];
