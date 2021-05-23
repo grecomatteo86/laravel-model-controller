@@ -16,9 +16,15 @@
 
         <ul>
             <li v-for='item in films'>
-                <p>@{{item.name}}</p>
+                <button v-on:click="detail(item.id)">@{{item.name}}</button>
             </li>
         </ul>
+
+        <div v-if="film">
+            <h2>@{{film.author}}</h2>
+            <h2>@{{film.genre}}</h2>
+            <h2>@{{film.description}}</h2>
+        </div>
 
     </div>
 
@@ -43,13 +49,16 @@
                     // console.log(response.data);
                     this.films = response.data;
                 })
+            },
 
-                axios.get('/laravel-model-controller/public/api/movies/{movie}')
-                .then((response) => {
-                    // console.log(response.data);
-                    this.film = response.data;
-                })
-            }
+            methods:{
+                detail:function(id){
+                    axios.get('/laravel-model-controller/public/api/movies/'+id)
+                    .then((response) => {
+                        this.film = response.data;
+                    })
+                }
+            },
         })
     </script>
 
