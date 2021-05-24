@@ -49,17 +49,20 @@ class MovieController extends Controller
 
         $data = $request -> all();
 
-        $movieNew = new Movie();
-        
-        if(isset($data['cover_image']) && !empty($data['cover_image'])){
-            $movieNew -> cover_image = $data['cover_image'];
-        }
-        $movieNew -> name = $data['name'];
-        $movieNew -> author = $data['author'];
-        $movieNew -> genre = $data['genre'];
-        $movieNew -> description = $data['description'];
+        //creazione nuovo oggetto direttamente con i dati della request
+        $movieNew = Movie::create($data);
 
-        $movieNew -> save();
+        // $movieNew = new Movie();
+        
+        // if(isset($data['cover_image']) && !empty($data['cover_image'])){
+        //     $movieNew -> cover_image = $data['cover_image'];
+        // }
+        // $movieNew -> name = $data['name'];
+        // $movieNew -> author = $data['author'];
+        // $movieNew -> genre = $data['genre'];
+        // $movieNew -> description = $data['description'];
+
+        // $movieNew -> save();
 
         return redirect()->route('movies.show', $movieNew);
 
