@@ -56,7 +56,18 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
+        // dd($request->all());
+
+        // controllo per fare in modo che se l'utente non inserisce la url dell'immagine allora venga settata quella di default
+        // perchè se utente non scrive nulla nella url immagine allora il sistema lo accetta come null, che è cmq un valore.
+        // invece, tramite controllo, gli diciamo che se il valore è nulla, cioè utente non ha inserito nulla nel campo, allora TOGLI dall'array questo valore
+        $data = $request->all();
+        if ($data['cover_image'] == null){
+            unset($data['cover_image']);
+        }
+        // a questo punto, nella creazione del nuovo oggetto, in basso, dovremmo passare $data, che è la variabile PRIVATA della cover image
+
+        // dd($data);
 
         // validazione sostituita dalla proprietà creata a hoc appena sotto
 
@@ -68,9 +79,6 @@ class MovieController extends Controller
         // ]);
 
         $request->validate($this->requestValidation);
-
-
-        $data = $request -> all();
 
         // $movieNew = new Movie();
         
