@@ -7,6 +7,23 @@ use App\Movie;
 
 class MovieController extends Controller
 {
+
+    // sposto tutta la validazione all'interno di una proprietà in modo da scriverla una sola volta e pulire il codice
+    protected $requestValidation = [];
+
+    public function __construct()
+    {
+        $this->requestValidation = [
+            'name' => 'required|string|max:100',
+            'author' => 'required|string|max:50',
+            'genre' => 'required|string|max:50',
+            'description' => 'required|string',
+        ];
+
+        // dd($this->requestValidation);
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -15,6 +32,7 @@ class MovieController extends Controller
     public function index()
     {
         $movies = Movie::all();
+        //dd($movies);
         
         return view ('movies.index', ['movies' => $movies]);
         // return view('movies.index',  compact['movies']);
@@ -40,17 +58,19 @@ class MovieController extends Controller
     {
         // dd($request);
 
-        $request->validate([
-            'name' => 'required|string|max:100',
-            'author' => 'required|string|max:50',
-            'genre' => 'required|string|max:50',
-            'description' => 'required|string',
-        ]);
+        // validazione sostituita dalla proprietà creata a hoc appena sotto
+
+        // $request->validate([
+        //     'name' => 'required|string|max:100',
+        //     'author' => 'required|string|max:50',
+        //     'genre' => 'required|string|max:50',
+        //     'description' => 'required|string',
+        // ]);
+
+        $request->validate($this->requestValidation);
+
 
         $data = $request -> all();
-
-        //creazione nuovo oggetto direttamente con i dati della request
-        $movieNew = Movie::create($data);
 
         // $movieNew = new Movie();
         
@@ -63,6 +83,10 @@ class MovieController extends Controller
         // $movieNew -> description = $data['description'];
 
         // $movieNew -> save();
+
+
+        //creazione nuovo oggetto direttamente con i dati della request, saltando il passaggio dell'assegnazione colonna per colonna fatto sopra
+        $movieNew = Movie::create($data);
 
         return redirect()->route('movies.show', $movieNew);
 
@@ -100,16 +124,23 @@ class MovieController extends Controller
     public function update(Request $request, Movie $movie)
     {
 
-        $request->validate([
-            'name' => 'required|string|max:100',
-            'author' => 'required|string|max:50',
-            'genre' => 'required|string|max:50',
-            'description' => 'required|string',
-        ]);
+        // validazione sostituita dalla proprietà creata a hoc appena sotto
 
-        $data = $request->all();
+        // $request->validate([
+        //     'name' => 'required|string|max:100',
+        //     'author' => 'required|string|max:50',
+        //     'genre' => 'required|string|max:50',
+        //     'description' => 'required|string',
+        // ]);
 
-        $movie->update($data);
+        $request->validate($this->requestValidation);
+
+
+        // $data = $request->all();
+        // $movie->update($data);
+
+        // metodo alternativo per scrivere quanto sopra senza passare per la variabile $data
+        $movie->update($request->all());
 
         return redirect()->route('movies.show', $movie);
     }
