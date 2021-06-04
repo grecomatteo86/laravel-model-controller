@@ -131,6 +131,14 @@ class MovieController extends Controller
      */
     public function update(Request $request, Movie $movie)
     {
+        // dd($request->all());
+
+        // stesso controllo di quanto fatto nella store, perchè utente potrebbe voler modificare un film e togliere la url dell'immagine che c'era prima, in questo caso il sistema registra che quel campo ha valore null e noi questo lo dobbiamo impedire
+        // successivamente dobbiamo sempre stare attenti a passare al metodo update la nostra variabile $data appena primavata del valore dell'immagine
+        $data = $request->all();
+        if ($data['cover_image'] == null){
+            unset($data['cover_image']);
+        }
 
         // validazione sostituita dalla proprietà creata a hoc appena sotto
 
@@ -148,7 +156,9 @@ class MovieController extends Controller
         // $movie->update($data);
 
         // metodo alternativo per scrivere quanto sopra senza passare per la variabile $data
-        $movie->update($request->all());
+        // $movie->update($request->all());
+
+        $movie->update($data);
 
         return redirect()->route('movies.show', $movie);
     }
