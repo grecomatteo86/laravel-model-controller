@@ -24,27 +24,27 @@
 
             <div class="mb-3">
                 <label for="cover_image">Immagine Cover</label>
-                <input type="text" class="form-control" id="cover_image" name="cover_image" placeholder="Url" value="{{$movie->cover_image}}">
+                <input type="text" class="form-control" id="cover_image" name="cover_image" placeholder="Url" value="{{old('cover_image') ? old('cover_image') : $movie->cover_image}}">
             </div>
 
             <div class="mb-3">
                 <label for="name">Titolo</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="Titolo" value="{{$movie->name}}">
+                <input type="text" class="form-control" id="name" name="name" placeholder="Titolo" value="{{old('name') ? old('name') : $movie->name}}">
             </div>
 
             <div class="mb-3">
                 <label for="author">Regista</label>
-                <input type="text" class="form-control" id="author" name="author" placeholder="Regista" value="{{$movie->author}}">
+                <input type="text" class="form-control" id="author" name="author" placeholder="Regista" value="{{old('author') ? old('author') : $movie->author}}">
             </div>
 
             <div class="mb-3">
                 <label for="genre">Genere</label>
-                <input type="text" class="form-control" id="genre" name="genre" placeholder="Genere" value="{{$movie->genre}}">
+                <input type="text" class="form-control" id="genre" name="genre" placeholder="Genere" value="{{old('genre') ? old('genre') : $movie->genre}}">
             </div>
 
             <div class="mb-3">
                 <label for="description">Trama</label>
-                <textarea class="form-control" name="description" id="description" rows="10" placeholder="Trama">{{$movie->description}}</textarea>
+                <textarea class="form-control" name="description" id="description" rows="10" placeholder="Trama">{{old('description') ? old('description') : $movie->description}}</textarea>
             </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>
