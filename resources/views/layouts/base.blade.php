@@ -10,11 +10,8 @@
 <body>
 
     <div class="container">
-
         <h1>@yield('pageTitle')</h1>
-
         @yield('content')
-
     </div>
 
 </body>
