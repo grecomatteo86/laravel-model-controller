@@ -7,8 +7,6 @@ use App\Movie;
 
 class MovieController extends Controller
 {
-
-    // sposto tutta la validazione all'interno di una proprietà in modo da scriverla una sola volta e pulire il codice
     protected $requestValidation = [];
 
     public function __construct()
@@ -19,8 +17,6 @@ class MovieController extends Controller
             'genre' => 'required|string|max:50',
             'description' => 'required|string',
         ];
-
-        // dd($this->requestValidation);
     }
 
 
@@ -32,10 +28,7 @@ class MovieController extends Controller
     public function index()
     {
         $movies = Movie::all();
-        //dd($movies);
-        
-        return view ('movies.index', ['movies' => $movies]);
-        // return view('movies.index',  compact['movies']);
+        return view('movies.index',  compact['movies']);
     }
 
     /**
@@ -56,48 +49,13 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
-
-        // controllo per fare in modo che se l'utente non inserisce la url dell'immagine allora venga settata quella di default
-        // perchè se utente non scrive nulla nella url immagine allora il sistema lo accetta come null, che è cmq un valore.
-        // invece, tramite controllo, gli diciamo che se il valore è nulla, cioè utente non ha inserito nulla nel campo, allora TOGLI dall'array questo valore
         $data = $request->all();
         if ($data['cover_image'] == null){
             unset($data['cover_image']);
         }
-        // a questo punto, nella creazione del nuovo oggetto, in basso, dovremmo passare $data, che è la variabile PRIVATA della cover image
-
-        // dd($data);
-
-        // validazione sostituita dalla proprietà creata a hoc appena sotto
-
-        // $request->validate([
-        //     'name' => 'required|string|max:100',
-        //     'author' => 'required|string|max:50',
-        //     'genre' => 'required|string|max:50',
-        //     'description' => 'required|string',
-        // ]);
-
         $request->validate($this->requestValidation);
-
-        // $movieNew = new Movie();
-        
-        // if(isset($data['cover_image']) && !empty($data['cover_image'])){
-        //     $movieNew -> cover_image = $data['cover_image'];
-        // }
-        // $movieNew -> name = $data['name'];
-        // $movieNew -> author = $data['author'];
-        // $movieNew -> genre = $data['genre'];
-        // $movieNew -> description = $data['description'];
-
-        // $movieNew -> save();
-
-
-        //creazione nuovo oggetto direttamente con i dati della request, saltando il passaggio dell'assegnazione colonna per colonna fatto sopra
         $movieNew = Movie::create($data);
-
         return redirect()->route('movies.show', $movieNew);
-
     }
 
     /**
@@ -131,35 +89,12 @@ class MovieController extends Controller
      */
     public function update(Request $request, Movie $movie)
     {
-        // dd($request->all());
-
-        // stesso controllo di quanto fatto nella store, perchè utente potrebbe voler modificare un film e togliere la url dell'immagine che c'era prima, in questo caso il sistema registra che quel campo ha valore null e noi questo lo dobbiamo impedire
-        // successivamente dobbiamo sempre stare attenti a passare al metodo update la nostra variabile $data appena primavata del valore dell'immagine
         $data = $request->all();
         if ($data['cover_image'] == null){
             unset($data['cover_image']);
         }
-
-        // validazione sostituita dalla proprietà creata a hoc appena sotto
-
-        // $request->validate([
-        //     'name' => 'required|string|max:100',
-        //     'author' => 'required|string|max:50',
-        //     'genre' => 'required|string|max:50',
-        //     'description' => 'required|string',
-        // ]);
-
         $request->validate($this->requestValidation);
-
-
-        // $data = $request->all();
-        // $movie->update($data);
-
-        // metodo alternativo per scrivere quanto sopra senza passare per la variabile $data
-        // $movie->update($request->all());
-
         $movie->update($data);
-
         return redirect()->route('movies.show', $movie);
     }
 
@@ -172,7 +107,6 @@ class MovieController extends Controller
     public function destroy(Movie $movie)
     {
         $movie->delete();
-
         return redirect()->route('movies.index')->with('message', 'Il film è stato eliminato');
     }
 }
